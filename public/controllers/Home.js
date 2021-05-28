@@ -3,10 +3,13 @@ window.onload = function () {
     const ctx = canvas.getContext("2d");
     var socket = null;
 
+    console.log(window.location.host);
     if (window.location.host == "localhost:3000") {
         socket = io("http://localhost:3000");
+    } else if (window.location.host == "http://oquarto.herokuapp.com/") {
+        window.location.href = "https://oquarto.herokuapp.com/";
     } else {
-        socket = io("http://roomber.herokuapp.com");
+        socket = io("https://oquarto.herokuapp.com/");
     }
 
     socket.emit("teste");
@@ -138,7 +141,16 @@ window.onload = function () {
     }
 
     class Node {
-        constructor(x, y, Xparent, Yparent, nodeEnd, isDiagonal, listaAberta, listaFechada) {
+        constructor(
+            x,
+            y,
+            Xparent,
+            Yparent,
+            nodeEnd,
+            isDiagonal,
+            listaAberta,
+            listaFechada
+        ) {
             this.x = x;
             this.y = y;
             this.f;
@@ -207,8 +219,26 @@ window.onload = function () {
             this.listaFechada = [];
             this.achouNoFinal = false;
             this.rota = [];
-            var noAtual = new Node(Xinitial, Yinitial, null, null, null, null, this.listaAberta, this.listaFechada);
-            var noFinal = new Node(XEnd, YEnd, null, null, null, null, this.listaAberta, this.listaFechada);
+            var noAtual = new Node(
+                Xinitial,
+                Yinitial,
+                null,
+                null,
+                null,
+                null,
+                this.listaAberta,
+                this.listaFechada
+            );
+            var noFinal = new Node(
+                XEnd,
+                YEnd,
+                null,
+                null,
+                null,
+                null,
+                this.listaAberta,
+                this.listaFechada
+            );
 
             this.listaFechada.push(noAtual);
 
