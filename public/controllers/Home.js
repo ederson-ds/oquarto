@@ -3,11 +3,12 @@ window.onload = function () {
     const ctx = canvas.getContext("2d");
     var socket = null;
 
-    console.log(window.location.host);
     if (window.location.host == "localhost:3000") {
         socket = io("http://localhost:3000");
-    } else if (window.location.host == "http://oquarto.herokuapp.com/") {
-        window.location.href = "https://oquarto.herokuapp.com/";
+    } else if (location.protocol !== "https:") {
+        location.replace(
+            `https:${location.href.substring(location.protocol.length)}`
+        );
     } else {
         socket = io("https://oquarto.herokuapp.com/");
     }
