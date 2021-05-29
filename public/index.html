@@ -1,58 +1,97 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>O quarto</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O quarto</title>
-</head>
+    <body>
+        <style>
+            body {
+                margin: 0;
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Old versions of Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+                overflow: hidden;
+            }
 
-<body>
-    <style>
-        body {
-            margin: 0;
-        }
-        
-        canvas {
-            image-rendering: pixelated;
-            image-rendering: crisp-edges;
-            image-rendering: -moz-crisp-edges;
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            top: 0;
-        }
-        
-        .messageTextBox {
-            position: absolute;
-            bottom: 120px;
-            left: 40%;
-            z-index: 9999;
-            width: 20%;
-        }
-        
-        .messages {
-            position: absolute;
-            height: 20%;
-            width: 40%;
-            left: 30%;
-            border: 1px solid white;
-            z-index: 1;
-            overflow: auto;
-        }
-        
-        .message {
-            color: white;
-        }
-    </style>
-    <div class="messages"></div>
-    <input id="messageInput" type="text" maxlength="100" class="messageTextBox" placeholder="Digite sua mensagem...">
-    <canvas oncontextmenu="return false;"></canvas>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
-    <script src="controllers/Home.js"></script>
-</body>
+            canvas {
+                image-rendering: pixelated;
+                image-rendering: crisp-edges;
+                image-rendering: -moz-crisp-edges;
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                top: 0;
+            }
 
+            .messageTextBox {
+                position: absolute;
+                bottom: 120px;
+                left: 40%;
+                z-index: 9999;
+                width: 20%;
+            }
+
+            .messages {
+                position: absolute;
+                height: 20%;
+                width: 40%;
+                left: 30%;
+                border: 1px solid white;
+                z-index: 1;
+                overflow: auto;
+            }
+
+            .message {
+                color: white;
+            }
+
+            .loginWindow {
+                z-index: 2;
+                width: 200px;
+                position: absolute;
+                background: white;
+            }
+
+            .header {
+                cursor: move;
+                height: 20px;
+                background: blue;
+            }
+        </style>
+        <div class="loginWindow">
+            <div class="header"></div>
+            <div class="content">
+                <h2>Login</h2>
+            </div>
+        </div>
+        <div class="messages"></div>
+        <input
+            id="messageInput"
+            type="text"
+            maxlength="100"
+            class="messageTextBox"
+            placeholder="Digite sua mensagem..."
+        />
+        <canvas oncontextmenu="return false;"></canvas>
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.socket.io/3.1.3/socket.io.min.js"
+            integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
+            crossorigin="anonymous"
+        ></script>
+        <script src="controllers/Home.js"></script>
+    </body>
 </html>

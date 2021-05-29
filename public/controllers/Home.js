@@ -13,7 +13,46 @@ window.onload = function () {
         socket = io("https://oquarto.herokuapp.com/");
     }
 
-    socket.emit("teste");
+    var active = false;
+    var currentX;
+    var currentY;
+    var initialX;
+    var initialY;
+    var xOffset = 0;
+    var yOffset = 0;
+    var dragItem = document.querySelector(".header");
+    var loginWindow = document.querySelector(".loginWindow");
+    dragItem.addEventListener("mousedown", dragStart, false);
+
+    $(document).mouseup(function (e) {
+        if (active) {
+            initialX = currentX;
+            initialY = currentY;
+
+            active = false;
+        }
+    });
+
+    $(document).mousemove(function (e) {
+        if (active) {
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+            xOffset = currentX;
+            yOffset = currentY;
+            setTranslate(currentX, currentY, loginWindow);
+        }
+    });
+
+    function dragStart(e) {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+
+        active = true;
+    }
+
+    function setTranslate(xPos, yPos, el) {
+        el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    }
 
     canvas.width = innerWidth;
     canvas.height = innerHeight;
@@ -2171,6 +2210,9 @@ window.onload = function () {
         false
     );
 
+    var loginWindowWidth = $(".loginWindow").outerWidth();
+    var loginWindowHeight = $(".loginWindow").outerHeight();
+
     function gameLoop(timestamp) {
         var deltaTime = timestamp - lastTime;
         lastTime = timestamp;
@@ -2182,6 +2224,30 @@ window.onload = function () {
             player.draw(ctx);
             player.update(deltaTime);
         });
+
+        //Window offsets
+        var offsets = document
+            .querySelector(".loginWindow")
+            .getBoundingClientRect();
+        var top = offsets.top;
+        var left = offsets.left;
+        var right = offsets.right;
+        var bottom = offsets.bottom;
+
+        if (left < 0) {
+            currentX = 0;
+        }
+        if (top < 0) {
+            currentY = 0;
+        }
+        if (right > innerWidth) {
+            currentX = innerWidth - loginWindowWidth;
+        }
+        if (bottom > innerHeight) {
+            currentY = innerHeight - loginWindowHeight;
+        }
+
+        setTranslate(currentX, currentY, loginWindow);
 
         requestAnimationFrame(gameLoop);
     }
